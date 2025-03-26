@@ -1,0 +1,14 @@
+<h1>Events#show</h1>
+<p>Find me in app/views/events/show.html.erb</p>
+<br>
+<h3>Event: <%= @event.title%></h3>
+<p>Host: <%= @event.creator.name%></p>
+<p>When: <%= @event.when%></p>
+<p>Where: <%= @event.location%></p>
+
+
+<% if @current_user = @event.creator %>
+  <%= link_to "Delete Event", event_path, data: { "turbo-method": :delete } %> <br>
+<%else%>
+
+<%end%>

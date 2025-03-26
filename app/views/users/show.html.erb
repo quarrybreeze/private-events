@@ -1,0 +1,12 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+
+<% if @events.any? %>
+  <% @events.each do |event|%>
+    <p>What: [Event Title Not Yet Added]</p>
+    <p>When: <%= event.when%></p>
+  <%end%>
+<%else%>
+  <p>This user has not created any events yet.</p>
+<%end%>
+
