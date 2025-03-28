@@ -1,6 +1,16 @@
 class EventsController < ApplicationController
   def index
     @events = Event.includes(:creator).all
+
+    #using scopes
+    @past_events = @events.previous_events
+    @future_events = @events.future_events
+
+
+    #using methods
+    # @past_events = @events.past
+    # @future_events = @events.future
+
   end
 
   def show
@@ -35,4 +45,6 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:event_date,:title,:location)
   end
+
+
 end
