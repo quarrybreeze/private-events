@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_225111) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.date "when"
+    t.date "event_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "creator_id", null: false

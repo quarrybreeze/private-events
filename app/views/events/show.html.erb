@@ -3,9 +3,21 @@
 <br>
 <h3>Event: <%= @event.title%></h3>
 <p>Host: <%= @event.creator.name%></p>
-<p>When: <%= @event.when%></p>
+<p>When: <%= @event.event_date%></p>
 <p>Where: <%= @event.location%></p>
 
+
+<% if @attendees.include?(current_user)%>
+<%else%>
+<%= button_to "Attend Event", event_attendances_path(@event)%>
+<%end%>
+
+<p>Attendees include:</p>
+<% @attendees.each do |attendee|%>
+  <li>Guest: <%= attendee.name%></li>
+<%end%>
+
+<br>
 
 <% if @current_user = @event.creator %>
   <%= link_to "Delete Event", event_path, data: { "turbo-method": :delete } %> <br>

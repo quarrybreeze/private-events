@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.includes(:creator).find(params[:id])
+    @event = Event.includes(:creator, attendances: :attendee).find(params[:id])
+    @attendees = @event.attendees
     @current_user = current_user
   end
 
@@ -32,6 +33,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:when,:title,:location)
+    params.require(:event).permit(:event_date,:title,:location)
   end
 end

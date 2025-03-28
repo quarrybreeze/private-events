@@ -1,12 +1,47 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 
-<% if @events.any? %>
-  <% @events.each do |event|%>
-    <p>What: [Event Title Not Yet Added]</p>
-    <p>When: <%= event.when%></p>
+<% if @events_created.any? %>
+<h3>Your hosted events: </h3>
+  <% @events_created.each do |event|%>
+    <% event_title = event.title%>
+    <% event_number = event.id%>
+    <h4>Event: <%= link_to event_title, event_path(event_number)%></h4>
+    <p>Where: <%= event.location%></p>
+    <p>When: <%= event.event_date%></p>
   <%end%>
 <%else%>
   <p>This user has not created any events yet.</p>
 <%end%>
 
+
+<% future_events = @attended_events.where(event_date: (Time.now)..) %>
+<% past_events = @attended_events.where(event_date: ..(Time.now)) %>
+<h3>Your upcoming events: </h3>
+<% if future_events.any? %>
+
+<%# after today %>
+  <% future_events.each do |event|%>
+    <% event_title = event.title%>
+    <% event_number = event.id%>
+    <h4>Event: <%= link_to event_title, event_path(event_number)%></h4>
+    <p>Where: <%= event.location%></p>
+    <p>When: <%= event.event_date%></p>
+  <%end%>
+<%else%>
+  <p>This user has no upcoming events.</p>
+<%end%>
+
+
+<h3>Your previous events: </h3>
+<% if past_events.any? %>
+  <% past_events.each do |event|%>
+    <% event_title = event.title%>
+    <% event_number = event.id%>
+    <h4>Event: <%= link_to event_title, event_path(event_number)%></h4>
+    <p>Where: <%= event.location%></p>
+    <p>When: <%= event.event_date%></p>
+  <%end%>
+<%else%>
+  <p>This user has no past events.</p>
+<%end%>
