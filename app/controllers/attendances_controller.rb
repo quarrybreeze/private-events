@@ -15,4 +15,11 @@ class AttendancesController < ApplicationController
       redirect_to @event, notice: "Issue registering for event"
     end
   end
+
+  def destroy
+    @event = Event.find(params[:event_id])
+    @attendance = @event.attendances.find_by(attendee_id: params[:id])
+    @attendance.destroy
+    redirect_to @event, notice: "You have successfully cancelled your RSVP."
+  end
 end
