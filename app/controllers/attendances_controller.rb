@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
 
   def destroy
     @event = Event.find(params[:event_id])
-    @attendance = @event.attendances.find_by(attendee_id: params[:id])
+    @attendance = @event.attendances.find_by(attendee_id: current_user.id)
     @attendance.destroy
     redirect_to @event, notice: "You have successfully cancelled your RSVP."
   end
