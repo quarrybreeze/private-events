@@ -19,8 +19,10 @@
 
 <br>
 
-<% if @current_user = @event.creator %>
+<% if @current_user == @event.creator %>
+  <%= link_to "Edit Event", edit_event_path%> <br>
   <%= link_to "Delete Event", event_path, data: { "turbo-method": :delete } %> <br>
 <%else%>
 
 <%end%>
+
